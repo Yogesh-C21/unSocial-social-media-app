@@ -3,15 +3,12 @@ import { PermMedia, Label, Room, EmojiEmotions } from '@mui/icons-material';
 import './share.css'
 import useAuth from '../../context/useAuth';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
 
-function Share() {
+function Share({ updatePost }) {
     const { user } = useAuth();
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [file, setFile] = useState(null);
     const description = useRef();
-    const navigate = useNavigate();
-    const location = useLocation();
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -39,7 +36,7 @@ function Share() {
         } catch (error) {
             console.log(error);
         }
-        navigate('/');
+        updatePost();
     }
     return (
         <div className="share">

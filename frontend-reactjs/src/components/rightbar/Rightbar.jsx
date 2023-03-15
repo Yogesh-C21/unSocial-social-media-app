@@ -3,22 +3,24 @@ import './rightbar.css'
 import { Users } from '../../data';
 import Online from '../online/Online';
 import axios from 'axios';
+import useAuth from '../../context/useAuth';
 
-function Rightbar({ user }) {
+function Rightbar({ home }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
+    const { user } = useAuth();
 
     useEffect(() => {
         const getFriends = async () => {
             try {
-                const friendList = axios.get(`http://localhost:8080/api/users/friends/${user._id}`);
+                const friendList = await axios.get(`http://localhost:8080/api/users/friends/${user._id}`);
                 setFriends(friendList.data);
             } catch (error) {
                 console.log(error);
             }
         }
         getFriends();
-    }, []);
+    }, [user]);
 
     const HomeRightBar = () => {
         return (
@@ -62,11 +64,11 @@ function Rightbar({ user }) {
                 </div>
                 <h4 className="rightbarTitleFriends">My Friends</h4>
                 <div className="rightbarFollowings">
-                    {friends.map((friend) => (
-                        <div className="rightbarFollowing">
-                            <img src={friend.profilePicture ? PF + friend.profilePicture :`${PF}noProfile.png`} alt="following-img" className="rightbarFollowingImg" />
+                    {friends?.map((friend) => (
+                        <div className="rightbarFollowing" key={friend._id}>
+                            <img src={friend.profilePicture ? PF + friend.profilePicture : `${PF}noProfile.png`} alt="following-img" className="rightbarFollowingImg" />
                             <span className="rightbarFollowingName">
-                                Mikasa Anderson
+                                {friend.username}
                             </span>
                         </div>
                     ))}
@@ -77,7 +79,7 @@ function Rightbar({ user }) {
     return (
         <div className="rightbarContainer">
             <div className="rightbarWrapper">
-                {user ? <ProfileRightbar /> : <HomeRightBar />}
+                {home ? <HomeRightBar /> : <ProfileRightbar />}
             </div>
         </div>
     )

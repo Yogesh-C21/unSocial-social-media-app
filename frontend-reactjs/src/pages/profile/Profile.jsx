@@ -3,25 +3,27 @@ import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
 import Rightbar from '../../components/rightbar/Rightbar';
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import { useParams } from "react-router-dom";
+import useAuth from "../../context/useAuth";
 
 function Profile() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
-  const {username} = useParams();
+  const { user } = useAuth();
 
+  // const {username} = useParams();
 
   // fetching user details that we will gonna use in post's top
-  useEffect(()=> {
+  /* useEffect(()=> {
     const fetchUser = async() => {
       const resp = await axios.get(`http://localhost:8080/api/users?username=${username}`);
       setUser(resp.data);
     }
     fetchUser();
-  }, [username]);
+  }, [username]); */
 
   return (
     <>
@@ -40,8 +42,8 @@ function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={user.username}/>
-            <Rightbar user={user}/>
+            <Feed home={false} />
+            <Rightbar home={false} />
           </div>
         </div>
       </div>

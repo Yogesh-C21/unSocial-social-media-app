@@ -1,11 +1,25 @@
 import './topbar.css';
 import { Search, Chat, Person, Notifications } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../context/useAuth';
 
 function Topbar() {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const homepageClickHandler = (event) => {
+    navigate('/');
+  }
+
+  const chatClickHandler = () => {
+    navigate('/messenger');
+  }
+
+  const profileOnClickHandler = () => {
+    navigate('/profile');
+  }
+
   return (
     <div className="topBarContainer">
       <div className="topBarLeft">
@@ -21,15 +35,15 @@ function Topbar() {
       </div>
       <div className="topBarRight">
         <div className="topBarLinks">
-          <span className="topBarLink">Homepage</span>
-          <span className="topBarLink">Timeline</span>
+          <span className="topBarLink" onClick={homepageClickHandler}>Homepage</span>
+          <span className="topBarLink" >Timeline</span>
         </div>
         <div className="topBarIcon">
           <div className="topBarIconItem">
             <Person />
             <span className="topBarIconBadge">1</span>
           </div>
-          <div className="topBarIconItem">
+          <div className="topBarIconItem" onClick={chatClickHandler}>
             <Chat />
             <span className="topBarIconBadge">4</span>
           </div>
@@ -38,12 +52,11 @@ function Topbar() {
             <span className="topBarIconBadge">3</span>
           </div>
         </div>
-        <Link to={user ? `profile/${user.username}` : "#"}>
-          <img
-            src={`${PF}noProfile.png`}
+        <img
+            src={user?.profilePicture ? PF + user.profilePicture : `${PF}noProfile.png`}
             alt="profile-pic-icon"
-            className="topBarImg" />
-        </Link>
+            className="topBarImg"
+            onClick = {profileOnClickHandler} />
       </div>
     </div>
   );

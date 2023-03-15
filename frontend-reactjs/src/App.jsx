@@ -20,6 +20,7 @@ function App() {
             {/*Protected Routes*/}
             <Route element={<RequiredAuth />}>
               <Route path='/' element={<Home />} />
+              <Route path='profile' element={<Profile />} />
               <Route path='profile/:username' element={<Profile />} />
               <Route path='messenger' element={<Messenger />} />
             </Route>
