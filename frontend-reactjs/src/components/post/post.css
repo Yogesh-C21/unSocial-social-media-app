@@ -21,6 +21,10 @@
     align-items: center;
 }
 
+.postTopRight {
+    cursor: pointer;
+}
+
 
 .postProfileImg {
     height: 35px;

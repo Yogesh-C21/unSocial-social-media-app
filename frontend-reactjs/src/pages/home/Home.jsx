@@ -11,8 +11,8 @@ function Home() {
             <Topbar />
             <div className="homeContainer">
                 <Sidebar />
-                <Feed />
-                <Rightbar />
+                <Feed home={true}/>
+                <Rightbar home={true} />
             </div>
         </>
     );

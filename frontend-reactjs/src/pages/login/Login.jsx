@@ -17,7 +17,7 @@ export default function Login() {
   const submitHandler = (event) => {
     event.preventDefault();
     loginCall({ email: email.current.value, password: password.current.value }, dispatch).then(() => {
-      navigate(location.state?.from.pathname);
+      navigate('/');
     });
   }
   return (

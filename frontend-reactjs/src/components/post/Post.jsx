@@ -47,7 +47,7 @@ export default function Post({ post }) {
                             <img src={user.profilePicture ? PF + user.profilePicture : `${PF}noProfile.png`} alt="user-profile-pic" className="postProfileImg" />
                         </Link>
                         <span className="postUsername">{user.username || 'User'}</span>
-                        <span className="postDate">{format(post.date)}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />

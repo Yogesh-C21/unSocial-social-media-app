@@ -95,7 +95,6 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete user
-
 router.delete('/:id', async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
